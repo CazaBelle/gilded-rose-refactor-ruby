@@ -66,25 +66,29 @@ describe GildedRose do
     end 
 
     context "Backstage passes" do 
+      before(:each) do
+        @items = [Item.new("Backstage passes to a TAFKAL80ETC concert", 10, 20 )]
+        @gildedrose = GildedRose.new(@items)
+      end 
+
       it "value increases by 2 when they are 10 or less" do
-        items = [Item.new("Backstage passes to a TAFKAL80ETC concert", 10, 20 )]
-        GildedRose.new(items).update_quality()
-        expect(items[0].sell_in).to eq 9
-        expect(items[0].quality).to eq 22
+        @gildedrose.update_quality()
+        expect(@items[0].sell_in).to eq 9
+        expect(@items[0].quality).to eq 22
       end 
 
       it "value increases by 3 when sellin is equal to or less then 5 day" do 
-        items = [Item.new("Backstage passes to a TAFKAL80ETC concert", 5, 20 )]
-        GildedRose.new(items).update_quality()
-        expect(items[0].sell_in).to eq 4
-        expect(items[0].quality).to eq 23
+        # items = [Item.new("Backstage passes to a TAFKAL80ETC concert", 5, 20 )]
+        # GildedRose.new(items).update_quality()
+        6.times {@gildedrose.update_quality() }
+        expect(@items[0].sell_in).to eq 4
+        expect(@items[0].quality).to eq 33
       end 
 
       it "value becomes zero when sellin day 0" do 
-        items = [Item.new("Backstage passes to a TAFKAL80ETC concert", 0, 20 )]
-        GildedRose.new(items).update_quality()
-        expect(items[0].sell_in).to eq -1 
-        expect(items[0].quality).to eq 0
+        11.times { @gildedrose.update_quality() }
+        expect(@items[0].sell_in).to eq -1 
+        expect(@items[0].quality).to eq 0
       end 
       
       end
