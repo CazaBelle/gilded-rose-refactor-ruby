@@ -53,16 +53,19 @@ describe GildedRose do
       end
 
     context "Sulfuras, Hand of Ragnaros" do 
+      before(:each) do 
+        @items =[Item.new("Sulfuras, Hand of Ragnaros", 0, 25)]
+        @giledrose = GildedRose.new(@items)
+      end 
+
       it "doesn't have a sellin date or decrease in quality" do 
-        items =[Item.new("Sulfuras, Hand of Ragnaros", 0, 25)]
-        GildedRose.new(items).update_quality()
-        expect(items[0].sell_in).to eq 0
-        expect(items[0].quality).to eq 25
+        @gildedrose.update_quality()
+        expect(@items[0].sell_in).to eq 0
+        expect(@items[0].quality).to eq 25
       end 
     end 
 
     context "Backstage passes" do 
-  
       it "value increases by 2 when they are 10 or less" do
         items = [Item.new("Backstage passes to a TAFKAL80ETC concert", 10, 20 )]
         GildedRose.new(items).update_quality()
