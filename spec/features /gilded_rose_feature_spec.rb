@@ -8,47 +8,48 @@ describe GildedRose do
 
     context 'normal items'do 
       before(:each) do 
-        @items = [Item.new("foo", 10, 10)]
-        @guildedrose = GildedRose.new(@items)
+        @items = [Item.new("foo", 10, 20)]
+        @gildedrose = GildedRose.new(@items)
       end 
 
       it "does not change the name" do
-        @guildedrose.update_quality()
+        @gildedrose.update_quality()
         expect(@items[0].name).to eq "foo"
       end
 
       it "the sellin should reduce by 1 each day" do
-        @guildedrose.update_quality()
+        @gildedrose.update_quality()
         expect(@items[0].sell_in).to eq 9
       end 
 
       it "quality should reduce by 2 after sellin date" do 
-        items = [Item.new("foo", -1, 10 )]
-        GildedRose.new(items).update_quality()
-        expect(items[0].quality).to eq 8
+        11.times { @gildedrose.update_quality() }
+        expect(@items[0].quality).to eq 8
       end 
   
       it "quality should never be negative even after sellin date" do 
-        items = [Item.new("foo", -4, 0 )]
-        GildedRose.new(items).update_quality()
+        14.times { @gildedrose.update_quality() }
         expect(@items[0].quality).to be >= 0
       end 
     end
   
     context "Aged Brie" do
+      before(:each) do 
+        @items = [Item.new("Aged Brie", 0, 5)]
+        @gildedrose = GildedRose.new(@items)
+      end 
+
       it "Aged Brie value increases by 2 after sellin" do 
-        items = [Item.new("Aged Brie", -1, 6)]
-        GildedRose.new(items).update_quality()
-        expect(items[0].quality).to eq 8
-        expect(items[0].sell_in).to eq -2
+        @gildedrose.update_quality()
+        expect(@items[0].quality).to eq 7
+        expect(@items[0].sell_in).to eq -1
 
       end 
 
       it "quality can never be greater then 50" do 
-        items = [Item.new("Aged Brie", 15, 50 )]
-        GildedRose.new(items).update_quality()
-        expect(items[0].quality).to be <= 50
-        expect(items[0].sell_in).to equal 14
+        25.times { @gildedrose.update_quality() }
+        expect(@items[0].quality).to be <= 50
+        expect(@items[0].sell_in).to equal -25
       end
 
     context "Sulfuras, Hand of Ragnaros" do 
