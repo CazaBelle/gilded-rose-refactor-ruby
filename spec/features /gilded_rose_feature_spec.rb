@@ -8,21 +8,18 @@ describe GildedRose do
 
     context 'normal items'do 
       before(:each) do 
-        items = [Item.new("foo", 0, 0)]
-        @gildedrose = GildedRose.new(items)
-        @guilded
+        @items = [Item.new("foo", 10, 10)]
+        @guildedrose = GildedRose.new(@items)
       end 
 
-      it "does not change the name" 
-       
-        expect(items[0].name).to eq "foo"
+      it "does not change the name" do
+        @guildedrose.update_quality()
+        expect(@items[0].name).to eq "foo"
       end
 
-      it "the sellin should reduce by 1" do
-        items = [Item.new("foo", 10, 0 )]
-        GildedRose.new(items).update_quality()
-        expect(items[0].sell_in).to eq 9
-
+      it "the sellin should reduce by 1 each day" do
+        @guildedrose.update_quality()
+        expect(@items[0].sell_in).to eq 9
       end 
 
       it "quality should reduce by 2 after sellin date" do 
@@ -34,7 +31,7 @@ describe GildedRose do
       it "quality should never be negative even after sellin date" do 
         items = [Item.new("foo", -4, 0 )]
         GildedRose.new(items).update_quality()
-        expect(items[0].quality).to be >= 0
+        expect(@items[0].quality).to be >= 0
       end 
     end
   
