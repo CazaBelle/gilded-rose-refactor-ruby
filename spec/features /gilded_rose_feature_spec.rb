@@ -7,10 +7,14 @@ describe GildedRose do
   describe "#update_quality" do
 
     context 'normal items'do 
-      it "does not change the name" do
-        # need to mock this class
+      before(:each) do 
         items = [Item.new("foo", 0, 0)]
-        GildedRose.new(items).update_quality()
+        @gildedrose = GildedRose.new(items)
+        @guilded
+      end 
+
+      it "does not change the name" 
+       
         expect(items[0].name).to eq "foo"
       end
 
@@ -67,8 +71,22 @@ describe GildedRose do
         expect(items[0].sell_in).to eq 9
         expect(items[0].quality).to eq 22
       end 
-    end 
 
+      it "value increases by 3 when sellin is equal to or less then 5 day" do 
+        items = [Item.new("Backstage passes to a TAFKAL80ETC concert", 5, 20 )]
+        GildedRose.new(items).update_quality()
+        expect(items[0].sell_in).to eq 4
+        expect(items[0].quality).to eq 23
+      end 
+
+      it "value becomes zero when sellin day 0" do 
+        items = [Item.new("Backstage passes to a TAFKAL80ETC concert", 0, 20 )]
+        GildedRose.new(items).update_quality()
+        expect(items[0].sell_in).to eq -1 
+        expect(items[0].quality).to eq 0
+      end 
+      
+      end
     end
   end
 
