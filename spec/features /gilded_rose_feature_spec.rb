@@ -64,6 +64,11 @@ describe GildedRose do
         @giledrose = GildedRose.new(@items)
       end 
 
+      it "the name should not change" do 
+        @gildedrose.update_quality()
+        expect(@items[0].name).to eq "Sulfuras, Hand of Ragnaros"
+      end 
+
       it "doesn't have a sellin date or decrease in quality" do 
         @gildedrose.update_quality()
         expect(@items[0].sell_in).to eq 0
@@ -75,6 +80,11 @@ describe GildedRose do
       before(:each) do
         @items = [Item.new("Backstage passes to a TAFKAL80ETC concert", 10, 20 )]
         @gildedrose = GildedRose.new(@items)
+      end 
+
+      it "the name should not change" do 
+        @gildedrose.update_quality()
+        expect(@items[0].name).to eq "Backstage passes to a TAFKAL80ETC concert"
       end 
 
       it "value increases by 2 when they are 10 or less" do
