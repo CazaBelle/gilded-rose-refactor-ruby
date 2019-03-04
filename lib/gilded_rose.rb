@@ -29,14 +29,11 @@ class GildedRose
           #backstage passes 
           if item.name == PASSES
             if item.sell_in < 11
-              if item.quality < 50
-                item.quality = item.quality + 1
-              end
+              change_quality_by(item, 1)
             end
             if item.sell_in < 6
-              if item.quality < 50
-                item.quality = item.quality + 1
-              end
+              change_quality_by(item, 1)
+    
             end
           end
         end
@@ -48,16 +45,14 @@ class GildedRose
       end
 
    #how normal items have their quality decreased if expired 
-      if item.sell_in < 0
+     if expired?(item)
         if item.name == AGED_BRIE
-          # increase_quality(item)
           change_quality_by(item, 1)
         elsif item.name == PASSES
           item.quality = item.quality - item.quality
         elsif item.name == SULFURAS
-          #do nothing
+     
         else
-          # decrease_quality(item)
           change_quality_by(item, -1)
           end
         end
@@ -73,3 +68,6 @@ def change_quality_by(item, value)
   end 
 end 
 
+def expired?(item)
+  item.sell_in < 0
+end
