@@ -6,7 +6,7 @@ describe GildedRose do
 
   describe "#update_quality" do
 
-    context 'normal items'do 
+    context "normal items" do 
       before(:each) do 
         @items = [Item.new("foo", 10, 20)]
         @gildedrose = GildedRose.new(@items)
@@ -101,13 +101,13 @@ describe GildedRose do
         expect(@items[0].quality).to eq 33
       end 
 
-      # it "value becomes zero when sellin day 0" do
-      #   items2 = [Item.new("Backstage passes to a TAFKAL80ETC concert", 10, 20 )]
-      #   rose = GildedRose.new(items2)
-      #   11.times { @gildedrose.update_quality() }
-      #   expect(items2[0].sell_in).to eq -1 
-      #   expect(items2[0].quality).to eq 0
-      # end 
+      it "value becomes zero when sellin day 0" do
+        items2 = [Item.new("Backstage passes to a TAFKAL80ETC concert", 10, 20 )]
+        rose = GildedRose.new(items2)
+        11.times { rose.update_quality() }
+        expect(items2[0].sell_in).to eq -1 
+        expect(items2[0].quality).to eq 0
+      end 
 
       it "increase only to 50 when sell_in about 10 and quality is 49" do 
         @items2 = [Item.new("Backstage passes to a TAFKAL80ETC concert", 10, 49 )]
