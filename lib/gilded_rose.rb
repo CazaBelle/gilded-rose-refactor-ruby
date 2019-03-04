@@ -1,6 +1,7 @@
 require 'item'
 require 'item_updater'
 require 'backstage_passes'
+require 'constants'
 
 
 class GildedRose
@@ -9,10 +10,7 @@ class GildedRose
     @items = items
   end
 
-  AGED_BRIE = "Aged Brie"
-  PASSES = "Backstage passes to a TAFKAL80ETC concert"
-  SULFURAS = "Sulfuras, Hand of Ragnaros"
-
+  include Constants 
 
   def update_quality()
     @items.each do |item|
