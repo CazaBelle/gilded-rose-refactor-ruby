@@ -20,7 +20,7 @@ class BackStagePassUpdater < ItemUpdater
     if item.sell_in < 5
       change_quality_by(item, 1)
     end
-    item.quality = item.quality - item.quality if expired?(item)
+  item.quality = item.quality - item.quality if expired?(item)
   end
 end
   
