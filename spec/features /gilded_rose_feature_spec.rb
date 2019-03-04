@@ -22,9 +22,9 @@ describe GildedRose do
         expect(@items[0].sell_in).to eq 9
       end 
 
-      it "quality should reduce by 1 after sellin date" do 
+      it "quality should reduce by 2 after sellin date" do 
         11.times { @gildedrose.update_quality() }
-        expect(@items[0].quality).to eq 9
+        expect(@items[0].quality).to eq 8
       end 
   
       it "value should never fall below 0 even after sellin" do 

@@ -50,35 +50,29 @@ class GildedRose
    #how normal items have their quality decreased if expired 
       if item.sell_in < 0
         if item.name == AGED_BRIE
-            if item.quality < 50
-              item.quality = item.quality + 1
-            elsif item.name == PASSES
-              item.quality = item.quality - item.quality
-
-        if item.name != AGED_BRIE
-       
-            if item.quality > 0
-              if item.name != SULFURAS
-                item.quality = item.quality - 1
-              end
-           
-          
-          else
-              #backstage pass goes to 0 when expired 
-           
+          if item.quality < 50
+            item.quality = item.quality + 1
           end
+        elsif item.name == PASSES
+          item.quality = item.quality - item.quality
+        elsif item.name == SULFURAS
+          #do nothing
         else
-
-       
+          decrease_quality(item)
           end
         end
       end
     end
-    end
   end
+
 
 # def increase_item_quality(item)
  
 # end
+
+def decrease_quality(item)
+  if item.quality > 0
+    item.quality = item.quality - 1
+end
 
 end
